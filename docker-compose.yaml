@@ -1,0 +1,13 @@
+name: "docusaurus"
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: docker/dockerfile
+      target: dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./website:/opt/docusaurus
+    environment:
+      - NODE_ENV=development
