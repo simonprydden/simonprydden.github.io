@@ -8,18 +8,19 @@ WORKDIR /opt/docusaurus
 
 # Stage 2a: Development mode.
 FROM base AS dev
-WORKDIR /opt/docusaurus
 EXPOSE 3000
+WORKDIR /opt/docusaurus
+COPY ./docker/entrypoint.sh /entrypoint.sh
 ## Run the development server.
-CMD [ -d "node_modules" ] && npm run start -- --host 0.0.0.0 --poll 1000 || npm install && npm run start -- --host 0.0.0.0 --poll 1000
+ENTRYPOINT ["sh", "/entrypoint.sh"]
 
 # Stage 2b: Production build mode.
 FROM base AS prod
 WORKDIR /opt/docusaurus
 ## Copy over the source code.
 COPY ./website /opt/docusaurus/
-RUN npm ci
-RUN npm run build
+RUN npm ci \
+    && npm run build
 
 # Stage 3a: Serve with `docusaurus serve`.
 FROM prod AS serve
