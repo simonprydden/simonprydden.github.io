@@ -1,6 +1,6 @@
+import {themes as prismThemes} from 'prism-react-renderer';
+import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-import type { Config } from '@docusaurus/types';
-import { themes as prismThemes } from 'prism-react-renderer';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -27,7 +27,7 @@ const config: Config = {
 
   presets: [
     [
-      '@docusaurus/preset-classic',
+      'classic',
       {
         docs: {
           sidebarPath: './sidebars.ts',
@@ -37,10 +37,6 @@ const config: Config = {
         blog: false, // Disable the blog plugin
         theme: {
           customCss: './src/css/custom.css',
-        },
-        gtag: {
-          trackingID: 'G-0E48WBPH3Z',
-          anonymizeIP: true,
         },
       } satisfies Preset.Options,
     ],
